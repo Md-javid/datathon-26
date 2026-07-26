@@ -3,7 +3,7 @@
 ![KSP IntelliCrime](https://img.shields.io/badge/Status-Datathon_Ready-brightgreen?style=for-the-badge)
 ![Tech Stack](https://img.shields.io/badge/Stack-React_|_TypeScript_|_Vite_|_Catalyst-blue?style=for-the-badge)
 
-**KSP IntelliCrime** is a next-generation Agentic AI dashboard built for the Karnataka State Police. It leverages Google Gemini to process natural language queries (in both English and Kannada), parsing complex FIR datasets to instantly map suspect networks, analyze crime trends, and generate dynamic operational action plans.
+**KSP IntelliCrime** is a next-generation Agentic AI dashboard built for the Karnataka State Police. It leverages Zoho Catalyst QuickML to process natural language queries (in both English and Kannada), parsing complex FIR datasets to instantly map suspect networks, analyze crime trends, and generate dynamic operational action plans.
 
 ## 🎯 Problem Statement
 Law enforcement agencies currently face severe bottlenecks when navigating massive, decentralized State Crime Records Bureau (SCRB) databases. Officers manually filter through thousands of FIRs to identify repeat offenders, parse suspect linkages, or generate emergency action plans, delaying critical response times. 
@@ -14,7 +14,7 @@ Law enforcement agencies currently face severe bottlenecks when navigating massi
 
 ## ✨ Key Features
 
-- **Agentic AI Intelligence Assistant:** Powered by Google Gemini 3.5 Flash Lite, the embedded AI allows officers to type natural language queries (e.g., *"Show me the analytics for Jayanagar"*) and retrieves highly specific suspect profiles and network linkages.
+- **Agentic AI Intelligence Assistant:** Powered by Catalyst QuickML (Qwen 2.5 14B), the embedded AI allows officers to type natural language queries (e.g., *"Show me the analytics for Jayanagar"*) and retrieves highly specific suspect profiles and network linkages.
 - **Bilingual NLP Support:** Fully supports localized law enforcement operations by natively processing both English and Kannada queries.
 - **Dynamic Case Prioritization:** Autonomously calculates a "Severity Priority Score" for all open FIRs and dynamically generates custom "Action Plans" based on crime type, repeat-offender flags, and current investigation stage.
 - **Zero-Latency Emergency Dispatch:** Features a live alert dashboard that uses a CORS-proxied Twilio REST API integration to dispatch formatted SMS alerts instantly and silently to on-duty patrol officers.
@@ -28,9 +28,9 @@ Law enforcement agencies currently face severe bottlenecks when navigating massi
 - **Frontend Framework:** React 18, TypeScript, Vite
 - **Styling:** Tailwind CSS (Glassmorphism & Tactical Dark Mode UI)
 - **Icons:** Lucide React
-- **Agentic AI:** Google Gemini 3.5 Flash Lite API (with fallback orchestration)
+- **Agentic AI:** Zoho Catalyst QuickML (LLM Serving - Qwen 2.5 14B)
 - **Hardware/Communications:** Twilio REST API (SMS Gateway)
-- **Deployment & Hosting:** Zoho Catalyst Serverless Platform
+- **Deployment & Hosting:** Zoho Catalyst Serverless Platform (Web Client Hosting)
 
 ---
 
@@ -50,9 +50,9 @@ To run this repository locally on your machine:
    ```
 
 3. **Configure Environment Variables:**
-   Create a `.env` file in the root directory and add your Google Gemini API key:
+   Create a `.env` file in the root directory and add your Catalyst QuickML Endpoint:
    ```env
-   VITE_GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+   VITE_CATALYST_QUICKML_ENDPOINT=YOUR_PUBLISHED_ENDPOINT_KEY
    ```
 
 4. **Start the Development Server:**
@@ -65,7 +65,7 @@ To run this repository locally on your machine:
 
 ## ☁️ Deployment to Zoho Catalyst
 
-This project is fully configured for deployment on the **Zoho Catalyst Serverless Platform**.
+This project is fully configured for deployment on the **Zoho Catalyst Serverless Platform** (Web Client Hosting).
 
 1. Ensure the Catalyst CLI is installed: `npm install -g zcatalyst-cli`
 2. Login to your Catalyst account: `catalyst login`
@@ -84,17 +84,16 @@ This project is fully configured for deployment on the **Zoho Catalyst Serverles
 
 While the current prototype handles critical parsing and communications, the vision for a production-level rollout includes:
 
-- **Multi-Agent Orchestration:** Deploying concurrent, specialized AI sub-agents (e.g., a "Forensics Agent" and a "Financial Audit Agent") that simultaneously think, analyze, and debate suspect linkages in the background before presenting a final consolidated report to the officer.
 - **Machine Learning Predictive Modeling:** Feeding historical SCRB data (once securely available) into a custom ML model to proactively predict spatial crime hotspots up to 72 hours in advance.
 - **Automated Voice Dispatch Bot:** Upgrading the silent SMS dispatch to a synthesized automated voice bot (using Twilio Voice API). When an emergency alert is triggered, the bot will physically call the on-duty patrol officer, bypassing "Do Not Disturb" settings to dictate the suspect's description and exact GPS coordinates immediately.
 
+---
 
-## ?? Architecture Justification (Datathon Compliance)
-While Catalyst QuickML is recognized as the standard for LLM serving in this ecosystem, this prototype utilized Google Gemini 3.5 Flash Lite specifically for its **native low-latency bilingual NLP tokenization capabilities in Kannada**. This hyper-localized language support is a strict operational requirement for the Karnataka State Police. We plan to migrate the Agentic NLP routing models entirely to **Zoho Catalyst QuickML** for the final production deployment phase once local language embeddings are sufficiently fine-tuned.
+## ⚖️ Architecture Justification (Datathon Compliance)
 
-Additionally, as Catalyst does not currently offer a native SMS Dispatch service (only Push/Mail), we leveraged **Twilio** to fulfill the critical Zero-Latency Emergency SMS routing requirement.
+As Catalyst does not currently offer a native SMS Dispatch service (only Push/Mail), we leveraged **Twilio** to fulfill the critical Zero-Latency Emergency SMS routing requirement. The rest of the stack, including the Agentic AI (QuickML) and Hosting (Web Client Hosting), is strictly Catalyst compliant.
 
+---
 
-## ?? Python LangGraph Agentic Pipeline (Microservice)
-Included in this repository is the ksp_agentic_pipeline/ directory, which contains a fully functional **Python LangGraph** multi-agent workflow. This pipeline demonstrates how FIR data can be processed through a stateful graph of LLM nodes (Severity Analysis -> Action Plan Generation -> Dispatch Decision). In a production environment, this Python microservice would be hosted on **Catalyst AppSail** to orchestrate backend agentic intelligence.
-
+## 🤖 Python LangGraph Agentic Pipeline (Microservice)
+Included in this repository is the `ksp_agentic_pipeline/` directory, which contains a fully functional **Python LangGraph** multi-agent workflow. This pipeline demonstrates how FIR data can be processed through a stateful graph of LLM nodes (Severity Analysis -> Action Plan Generation -> Dispatch Decision). In a production environment, this Python microservice would be hosted on **Catalyst AppSail** to orchestrate backend agentic intelligence.

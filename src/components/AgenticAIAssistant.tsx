@@ -29,7 +29,7 @@ interface ConversationContext {
   lastQueriedPerson?: string;
 }
 
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyDYbtnPaPOoD9OR6NRiCHPjzoPO9HFAPOU';
+const CATALYST_QUICKML_ENDPOINT = import.meta.env.VITE_CATALYST_QUICKML_ENDPOINT || '';
 
 export const AgenticAIAssistant: React.FC<AgenticAIAssistantProps> = ({ data }) => {
   const [messages, setMessages] = useState<Message[]>([
@@ -212,17 +212,22 @@ INSTRUCTIONS FOR REPLY:
 2. Format using clean HTML (<b>bold</b>, <br>, <ul>, <li>). Do NOT use markdown code blocks or developer technical terms.
 3. CRITICAL LANGUAGE REQUIREMENT: The user's interface language is set to '${speechLanguage === 'kn-IN' ? 'Kannada' : 'English'}'. If it is 'Kannada', you MUST reply ENTIRELY in Kannada (ಕನ್ನಡ) script. If it is 'English', reply in English. Always match the language of the user's query if they speak in Kannada.`;
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${GEMINI_API_KEY}`, {
+        // CATALYST QUICKML LLM SERVING INTEGRATION (Datathon Compliance)
+        const response = await fetch(`https://api.catalyst.zoho.in/baas/v1/project/12345/quickml/llm/predict`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Zoho-oauthtoken ${CATALYST_QUICKML_ENDPOINT}`
+          },
           body: JSON.stringify({
-            contents: [{ parts: [{ text: universalPrompt }] }]
+            model_id: "qwen-2.5-14b-instruct",
+            prompt: universalPrompt
           })
         });
 
         if (response.ok) {
           const json = await response.json();
-          const candidateText = json.candidates?.[0]?.content?.parts?.[0]?.text;
+          const candidateText = json.data?.generated_text;
           if (candidateText && candidateText.length > 10) {
             geminiText = candidateText.replace(/\n/g, '<br>');
             geminiSuccess = true;

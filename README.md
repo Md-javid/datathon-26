@@ -14,7 +14,7 @@ Law enforcement agencies currently face severe bottlenecks when navigating massi
 
 ## ✨ Key Features
 
-- **Agentic AI Intelligence Assistant:** Powered by Catalyst QuickML (Qwen 2.5 14B), the embedded AI allows officers to type natural language queries (e.g., *"Show me the analytics for Jayanagar"*) and retrieves highly specific suspect profiles and network linkages.
+- **Agentic AI Intelligence Assistant:** Powered by Catalyst QuickML (GLM-4.7-Flash), the embedded AI allows officers to type natural language queries (e.g., *"Show me the analytics for Jayanagar"*) and retrieves highly specific suspect profiles and network linkages.
 - **Bilingual NLP Support:** Fully supports localized law enforcement operations by natively processing both English and Kannada queries.
 - **Dynamic Case Prioritization:** Autonomously calculates a "Severity Priority Score" for all open FIRs and dynamically generates custom "Action Plans" based on crime type, repeat-offender flags, and current investigation stage.
 - **Zero-Latency Emergency Dispatch:** Features a live alert dashboard that uses a CORS-proxied Twilio REST API integration to dispatch formatted SMS alerts instantly and silently to on-duty patrol officers.
@@ -28,7 +28,7 @@ Law enforcement agencies currently face severe bottlenecks when navigating massi
 - **Frontend Framework:** React 18, TypeScript, Vite
 - **Styling:** Tailwind CSS (Glassmorphism & Tactical Dark Mode UI)
 - **Icons:** Lucide React
-- **Agentic AI:** Zoho Catalyst QuickML (LLM Serving - Qwen 2.5 14B)
+- **Agentic AI:** Zoho Catalyst QuickML (LLM Serving - GLM-4.7-Flash)
 - **Hardware/Communications:** Twilio REST API (SMS Gateway)
 - **Deployment & Hosting:** Zoho Catalyst Serverless Platform (Web Client Hosting)
 

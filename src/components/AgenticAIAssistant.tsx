@@ -220,7 +220,7 @@ INSTRUCTIONS FOR REPLY:
             'Authorization': `Zoho-oauthtoken ${CATALYST_QUICKML_ENDPOINT}`
           },
           body: JSON.stringify({
-            model_id: "qwen-2.5-14b-instruct",
+            model_id: "glm-4.7-flash",
             prompt: universalPrompt
           })
         });

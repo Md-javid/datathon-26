@@ -213,21 +213,41 @@ INSTRUCTIONS FOR REPLY:
 3. CRITICAL LANGUAGE REQUIREMENT: The user's interface language is set to '${speechLanguage === 'kn-IN' ? 'Kannada' : 'English'}'. If it is 'Kannada', you MUST reply ENTIRELY in Kannada (ಕನ್ನಡ) script. If it is 'English', reply in English. Always match the language of the user's query if they speak in Kannada.`;
 
         // CATALYST QUICKML LLM SERVING INTEGRATION (Datathon Compliance)
-        const response = await fetch(`https://api.catalyst.zoho.in/baas/v1/project/12345/quickml/llm/predict`, {
+        const url = "https://api.catalyst.zoho.in/quickml/v1/project/52021000000013025/glm/chat";
+        const headers = {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${CATALYST_QUICKML_ENDPOINT}`,
+          "CATALYST-ORG": "60079741921"
+        };
+        const dataPayload = {
+          "model": "crm-di-glm47b_30b_it",
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are the official Karnataka State Police (KSP) Universal Crime Intelligence & Operational Assistant."
+            },
+            {
+              "role": "user",
+              "content": universalPrompt
+            }
+          ],
+          "max_tokens": 500,
+          "temperature": 0.7,
+          "stream": false,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        };
+
+        const response = await fetch(url, {
           method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Zoho-oauthtoken ${CATALYST_QUICKML_ENDPOINT}`
-          },
-          body: JSON.stringify({
-            model_id: "glm-4.7-flash",
-            prompt: universalPrompt
-          })
+          headers: headers,
+          body: JSON.stringify(dataPayload)
         });
 
         if (response.ok) {
           const json = await response.json();
-          const candidateText = json.data?.generated_text;
+          const candidateText = json.choices?.[0]?.message?.content || json.data?.generated_text;
           if (candidateText && candidateText.length > 10) {
             geminiText = candidateText.replace(/\n/g, '<br>');
             geminiSuccess = true;

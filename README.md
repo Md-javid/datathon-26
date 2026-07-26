@@ -94,3 +94,7 @@ While Catalyst QuickML is recognized as the standard for LLM serving in this eco
 
 Additionally, as Catalyst does not currently offer a native SMS Dispatch service (only Push/Mail), we leveraged **Twilio** to fulfill the critical Zero-Latency Emergency SMS routing requirement.
 
+
+## ?? Python LangGraph Agentic Pipeline (Microservice)
+Included in this repository is the ksp_agentic_pipeline/ directory, which contains a fully functional **Python LangGraph** multi-agent workflow. This pipeline demonstrates how FIR data can be processed through a stateful graph of LLM nodes (Severity Analysis -> Action Plan Generation -> Dispatch Decision). In a production environment, this Python microservice would be hosted on **Catalyst AppSail** to orchestrate backend agentic intelligence.
+

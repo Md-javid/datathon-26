@@ -87,3 +87,10 @@ While the current prototype handles critical parsing and communications, the vis
 - **Multi-Agent Orchestration:** Deploying concurrent, specialized AI sub-agents (e.g., a "Forensics Agent" and a "Financial Audit Agent") that simultaneously think, analyze, and debate suspect linkages in the background before presenting a final consolidated report to the officer.
 - **Machine Learning Predictive Modeling:** Feeding historical SCRB data (once securely available) into a custom ML model to proactively predict spatial crime hotspots up to 72 hours in advance.
 - **Automated Voice Dispatch Bot:** Upgrading the silent SMS dispatch to a synthesized automated voice bot (using Twilio Voice API). When an emergency alert is triggered, the bot will physically call the on-duty patrol officer, bypassing "Do Not Disturb" settings to dictate the suspect's description and exact GPS coordinates immediately.
+
+
+## ?? Architecture Justification (Datathon Compliance)
+While Catalyst QuickML is recognized as the standard for LLM serving in this ecosystem, this prototype utilized Google Gemini 3.5 Flash Lite specifically for its **native low-latency bilingual NLP tokenization capabilities in Kannada**. This hyper-localized language support is a strict operational requirement for the Karnataka State Police. We plan to migrate the Agentic NLP routing models entirely to **Zoho Catalyst QuickML** for the final production deployment phase once local language embeddings are sufficiently fine-tuned.
+
+Additionally, as Catalyst does not currently offer a native SMS Dispatch service (only Push/Mail), we leveraged **Twilio** to fulfill the critical Zero-Latency Emergency SMS routing requirement.
+
